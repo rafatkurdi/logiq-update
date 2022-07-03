@@ -41,7 +41,8 @@
                 >
                 <div class="video-button color-{{ video.color }}"  [ngClass]="{
                       active: video.active == true,
-                      playing: video.playing == true
+                      playing: video.playing == true,
+                      'video-button-selected': video.active == true
                     }">
                   <div class="checkbox" (click)="toggleActiveVideo(video.index)"></div>
                   <div class="desc">

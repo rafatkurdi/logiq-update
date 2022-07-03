@@ -988,6 +988,7 @@ export class VideoBoxComponent implements OnInit {
 
 
   showPlayersNotePanel() {
+    debugger;
     this.videoClip = { players: [] };
     this.formationsAnalysisService
       .getCompetitionDetails('173d42cf-0ee0-444b-b9c9-7e8348dfe3ef')
