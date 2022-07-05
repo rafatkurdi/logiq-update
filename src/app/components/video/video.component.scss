@@ -1802,3 +1802,8 @@
 .download-button:hover {
   text-decoration: underline;
 }
+
+.disabled-button {
+  pointer-events: none;
+  opacity: 0.3;
+}

@@ -5,7 +5,7 @@ import { TranslatePipe } from "../../pipes/translate.pipe";
 import { Options } from "ng5-slider";
 import { DomSanitizer } from "@angular/platform-browser";
 import { $ } from "protractor";
-import {EventType, EventKey} from '../../enums/match-type.enum';
+import { EventType, EventKey } from '../../enums/match-type.enum';
 import { FormationsAnalysisService } from "../../services/formations-analysis/formations-analysis.service";
 import { forEach } from "lodash";
 
@@ -41,6 +41,7 @@ export class VideoBoxComponent implements OnInit {
   active_video_time: string = "";
 
   download_all_disabled: boolean = false;
+  sending_video_clip: boolean = false;
 
   @Output() onVideoClose: EventEmitter<any> = new EventEmitter<any>();
   @Input() videos: any = [];
@@ -155,10 +156,10 @@ export class VideoBoxComponent implements OnInit {
     }
   }
 
-  
+
   toggleVideoDetail(video: any) {
-    if(video.events.length > 0)
-      video.isDetailViewOpen  = !video.isDetailViewOpen ;
+    if (video.events.length > 0)
+      video.isDetailViewOpen = !video.isDetailViewOpen;
   }
 
 
@@ -176,8 +177,8 @@ export class VideoBoxComponent implements OnInit {
   }
 
 
-  getEventTypeInCzech(eventTypeEng: string){
-      return EventKey[eventTypeEng.toUpperCase()] ;
+  getEventTypeInCzech(eventTypeEng: string) {
+    return EventKey[eventTypeEng.toUpperCase()];
   }
 
   getGameState2(state: string) {
@@ -781,11 +782,11 @@ export class VideoBoxComponent implements OnInit {
 
 
 
-  playEventVideo(video_data: any , event_data : any) {
+  playEventVideo(video_data: any, event_data: any) {
     if (video_data.playing == false) {
       this.videos2.forEach((item) => {
         item["playing"] = false;
-        
+
         if (video_data.index == item.index) {
           item["playing"] = true;
           item["active"] = true;
@@ -994,8 +995,15 @@ export class VideoBoxComponent implements OnInit {
       .getCompetitionDetails('173d42cf-0ee0-444b-b9c9-7e8348dfe3ef')
       .subscribe((loaded_data) => {
         if (loaded_data != null) {
+          debugger;
           var players = loaded_data.teams[0].players;
-          this.NotePlayers = players;
+          //this.NotePlayers = players;
+          this.NotePlayers = [];
+          players.forEach(element => {
+            if (!this.NotePlayers.find(fEle => fEle.uuid === element.uuid)) {
+              this.NotePlayers.push(element);
+            }
+          });
         }
       },
         (err) => {
@@ -1032,14 +1040,19 @@ export class VideoBoxComponent implements OnInit {
   }
 
   sendVideoClip() {
-    var obj = {
+    debugger;
+    this.sending_video_clip= true;
+    let name: any = document.getElementById("videoClipName");
+    let body: any = document.getElementById("videoClipDescription");
+
+    let obj = {
       "time": this.currentVideo.time,
       "videoTime": this.currentVideo.videoTime,
       "endVideoTime": 4500,
       "videoId": this.currentVideo.videoId,
       "matchId": this.currentVideo.match,
-      "name": this.videoClip.name,
-      "description": this.videoClip.description,
+      "name": name.value,
+      "description": body.value,
       "type": "thumbs-up",
       "players": this.videoClip.players
     };
@@ -1049,9 +1062,11 @@ export class VideoBoxComponent implements OnInit {
       .subscribe((response) => {
         debugger;
         this.hidePlayersNotePanel();
+        this.sending_video_clip= false;
       },
         (err) => {
           debugger;
+          this.sending_video_clip= false;
         });
 
 

@@ -7052,11 +7052,7 @@ export class FormationsAnalysisService {
         options
       )
       .map((res) => res.json())
-      .catch((e) => {
-        if (e.status === 401) {
-          return Observable.throw("Unauthorized");
-        }
-      });
+      
   }
 
   createVideoClip(clip: any) {
@@ -7074,10 +7070,6 @@ export class FormationsAnalysisService {
         options
       )
       .map((res) => res.json())
-      .catch((e) => {
-        if (e.status === 401) {
-          return Observable.throw("Unauthorized");
-        }
-      });
+      
   }
 }
