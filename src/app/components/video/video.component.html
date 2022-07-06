@@ -22,9 +22,9 @@
         <div class="column aside-box">
           <div class="row form">
             <div class="column controls-title">
-              {{ getEventTypeInCzech(active_type) | translate  }}
+              {{ getEventTypeInCzech(active_type) | translate }}
             </div>
-            
+
           </div>
           <div class="row form"     [ngClass]="{  event_filter: parentPage == 'games'  }"   >
             <div *ngIf="parentPage == 'games'">
@@ -65,10 +65,8 @@
           </div>
           <div class="row videos-row">
             <div class="video-selects">
-              <div
-                  *ngFor="let video of videos2"
-                >
-                <div class="video-button color-{{ video.color }}"  [ngClass]="{
+              <div *ngFor="let video of videos2">
+                <div class="video-button color-{{ video.color }}" [ngClass]="{
                       active: video.active == true,
                       playing: video.playing == true,
                       'video-button-selected': video.active == true
@@ -83,7 +81,7 @@
                   <div class="menu" (click)="toggleVideoDetail(video)" *ngIf="video.events != undefined &&  getVisibleEventsCount(video.events) > 0" ></div>
                   <div class="menu-blank" *ngIf="video.events != undefined &&  getVisibleEventsCount(video.events) == 0" ></div>
                   <div class="play" (click)="playVideo(video)"></div>
-                  <div class="edit"></div>
+                  <div class="edit" (click)="showPlayersNotePanel()"></div>
                   <div class="cropped" [ngClass]="{
                         active: video.before != '-5' || video.after != '+5'
                       }">
@@ -101,9 +99,10 @@
                   <div class="state">{{ video.matchDate | match_date }}</div>
                 </div>
 
-                <div style="border-radius: 8px;background-color: #f2f4f8; margin: -7px 0 8px 0;"   *ngIf="video.isDetailViewOpen" >
-                  <div  *ngFor="let event of  video.events ">
-                    <div class="event-row"   [ngClass]="{ 
+                <div style="border-radius: 8px;background-color: #f2f4f8; margin: -7px 0 8px 0;"
+                  *ngIf="video.isDetailViewOpen">
+                  <div *ngFor="let event of  video.events ">
+                    <div class="event-row" [ngClass]="{ 
                       active: event.active == true,
                       playing: event.playing == true
                     }"    
@@ -114,13 +113,11 @@
                       [ngClass]="{ 
                         active: event.active == true,
                         playing: event.playing == true
-                      }"
-                      (click)="toggleActiveEvent(event)"
-                    ></div>
+                      }" (click)="toggleActiveEvent(event)"></div>
 
-                    <span class="time" >
-                      {{ event.time | format_sesonds2 }}
-                    </span>
+                      <span class="time">
+                        {{ event.time | format_sesonds2 }}
+                      </span>
 
 
                     <span class="selected-eva">
@@ -131,34 +128,32 @@
                     </span>
   
 
-                    <span class="event-type">
-                      {{event.eventType}}
-                    </span>
-                    <div class="play" (click)="playEventVideo(video,event)"></div>
-                    <div class="edit"></div>
 
-                    <div
-                    class="cropped"
-                    [ngClass]="{
+                      <span class="event-type">
+                        {{event.eventType}}
+                      </span>
+                      <div class="play" (click)="playEventVideo(video,event)"></div>
+                      <div class="edit"></div>
+
+                      <div class="cropped" [ngClass]="{
                       active: video.before != '-5' || video.after != '+5'
-                    }"
-                    >
-                      <div class="tooltip">
-                        {{ video.before }} {{ video.after }}
+                    }">
+                        <div class="tooltip">
+                          {{ video.before }} {{ video.after }}
+                        </div>
                       </div>
-                    </div>
 
 
-                    <div class="desc">
-                      {{ getPlayerJersey(video.player) }}
-                      {{ getPlayerName(video.player) }}
-                      <!--{{getShotType(video)}}-->
-                    </div>
+                      <div class="desc">
+                        {{ getPlayerJersey(video.player) }}
+                        {{ getPlayerName(video.player) }}
+                        <!--{{getShotType(video)}}-->
+                      </div>
 
                     </div>
                   </div>
 
-                </div> 
+                </div>
 
               </div>
             </div>
@@ -244,7 +239,7 @@
             <div class="subject">
               <div class="left">
                 <div class="label">{{"clip_name" | translate}}</div>
-                <input [(ngModel)]="videoClip.name" />
+                <input id="videoClipName" />
               </div>
               <div class="right">
                 <div class="label">{{"event_evaluation" | translate}}</div>
@@ -258,7 +253,7 @@
 
             <div class="body">
               <div class="label">{{"game_note_situation" | translate}}</div>
-              <textarea [(ngModel)]="videoClip.description"></textarea>
+              <textarea id="videoClipDescription"></textarea>
 
             </div>
 
@@ -267,27 +262,30 @@
               <div class="deffenders">
                 <div class="title">{{"defenders" | translate}}</div>
                 <div class="player" *ngFor="let item of NotePlayers | filter : 'position' : 'DE'"
-                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}" (click)="toggleReceiptPlayerList(item)">
+                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}"
+                  (click)="toggleReceiptPlayerList(item)">
                   #{{item.jersey}}, {{item.surname}} {{item.name.substring(0, 1)}}.
                 </div>
               </div>
               <div class="attackers">
                 <div class="title">{{"attackers" | translate}}</div>
                 <div class="player" *ngFor="let item of NotePlayers | filter : 'position' : 'FO'"
-                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}" (click)="toggleReceiptPlayerList(item)">
+                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}"
+                  (click)="toggleReceiptPlayerList(item)">
                   #{{item.jersey}}, {{item.surname}} {{item.name.substring(0, 1)}}.
                 </div>
               </div>
               <div class="goal-keepers">
                 <div class="title">{{"goal_keepers" | translate}}</div>
-                <div class="player" *ngFor="let item of NotePlayers | filter : 'position' : 'GK'"
-                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}" (click)="toggleReceiptPlayerList(item)">
+                <div class="player" *ngFor="let item of NotePlayers  | filter : 'position' : 'GK'"
+                  [ngClass]="{'selected-player': isPlayerAlreadyOnVideoClip(item)}"
+                  (click)="toggleReceiptPlayerList(item)">
                   #{{item.jersey}}, {{item.surname}} {{item.name.substring(0, 1)}}.
                 </div>
               </div>
             </div>
             <div class="footer">
-              <div class="send-button" (click)="sendVideoClip()">
+              <div class="send-button" [ngClass]="{'disabled-button': sending_video_clip}" (click)="sendVideoClip()">
                 {{"send_to_players" | translate}}
               </div>
             </div>
