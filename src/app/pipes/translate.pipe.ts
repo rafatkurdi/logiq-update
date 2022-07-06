@@ -1972,6 +1972,26 @@ export class TranslatePipe implements PipeTransform {
         en: "All",
       },
       {
+        key: "hracem",
+        cz: "Hráčem",
+        en: "Player",
+      },
+      {
+        key: "soupere",
+        cz: "soupeře",
+        en: "Opponent",
+      },
+      {
+        key: "zobrazit_udalosti",
+        cz: "Zobrazit události",
+        en: "Events Filter",
+      },
+      {
+        key: "tymu",
+        cz: "týmu",
+        en: "Team",
+      },
+      {
         key: "vsichni",
         cz: "Všichni",
         en: "All",

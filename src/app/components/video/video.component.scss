@@ -148,6 +148,46 @@
       padding-top: 12px;
       border-bottom-left-radius: 16px;
 
+
+      .event_filter{
+        display:flex;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+      
+      .BGbutton {
+        width: 88px;
+        height: 40px;
+        margin: 4px 0 10px;
+        padding: 9px 0 9px 0;
+        border-radius: 8px;
+        border: solid 1px #a2a9b0;
+        background-image: linear-gradient(to bottom, #fff, #f2f4f8);
+        text-align: center;
+      
+        &.active{
+          background-image: linear-gradient(to bottom, #4985ff, #1d5cff 100%);
+          .name {
+            color: #fff;
+          }
+        }
+      
+        .name {
+          width: 37px;
+          height: 22px;
+          font-family: Inter;
+          font-size: 14px;
+          font-weight: normal;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.57;
+          letter-spacing: normal;
+          text-align: center;
+          color: #121619;
+        }
+      
+      }
+
       .form {
         .column {
           padding: 0px;
@@ -1802,3 +1842,4 @@
 .download-button:hover {
   text-decoration: underline;
 }
+

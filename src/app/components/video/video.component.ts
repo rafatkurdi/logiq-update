@@ -47,6 +47,8 @@ export class VideoBoxComponent implements OnInit {
   @Input() players_list: any = [];
   @Input() active_type: string = "";
   @Input() teams_list: any = [];
+  @Input() parentPage : string = "";
+  selected_filter:string = "all";
 
   video_type: string = "";
 
@@ -1056,4 +1058,61 @@ export class VideoBoxComponent implements OnInit {
 
 
   }
+
+  filterEvents(filterType : string){
+
+        if(filterType == this.selected_filter)
+          filterType= 'all'
+
+        if(filterType=='all'){
+            this.videos2.forEach(video=>{
+              video.events.forEach(element => {
+                element.visible=true;
+              });
+            })
+            this.selected_filter = "all";
+        }else if(filterType=='player'){
+          this.videos2.forEach(video=>{
+            video.events.forEach(event => {
+              if(event.player == video.player)
+                  event.visible=true;
+              else
+                event.visible=false;
+            });
+          })
+          this.selected_filter = "player";
+        }else if(filterType=='team'){
+          this.videos2.forEach(video=>{
+            video.events.forEach(event => {
+              if(event.teamId == video.homeTeam )
+                  event.visible=true;
+              else
+                event.visible=false;
+            });
+          })
+          this.selected_filter = "team";
+        }else if(filterType=='opposition'){
+
+          this.videos2.forEach(video=>{
+            video.events.forEach(event => {
+              if(event.teamId == video.awayTeam )
+                  event.visible=true;
+              else
+                event.visible=false;
+            });
+          })
+          this.selected_filter = "opposition";
+        }
+        console.log("this.videos2",this.videos2)
+  }
+
+
+  getVisibleEventsCount(events : any[]){
+    if (events == null )
+        return 0 ;
+    else
+      return events.filter(x=>x.visible != false).length;
+  }
+
+  
 }

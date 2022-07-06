@@ -4100,10 +4100,9 @@ export class GamesComponent implements OnInit {
           eventData = eventData.concat( this.updateEventName (item.dumpIns ,"nahozeni"));
           eventData = eventData.concat( this.updateEventName (item.dumpOuts ,"vyhozeni"));
           eventData = eventData.concat( this.updateEventName (item.puckWins,"zisk_puku"));
-          eventData = eventData.concat( this.updateEventName (item.goals,"gol"));
           eventData = eventData.concat( this.updateEventName (item.shots,"strela"));
           eventData = eventData.concat( this.updateEventName (item.shotsOnGoal,"strely_na_branku"));
-
+          eventData.sort(this.sortBy('time', false));
           this.videos_data.push({
             index: index,
             player: player_uuid,
@@ -5508,4 +5507,26 @@ export class GamesComponent implements OnInit {
       }
     }
   }
+
+  sortBy(key, reverse) {
+    const moveSmaller = reverse ? 1 : -1;
+    const moveLarger = reverse ? -1 : 1;
+
+    /**
+     * @param  {*} a
+     * @param  {*} b
+     * @return {Number}
+     */
+    return function (a, b) {
+      if (a[key] < b[key]) {
+        return moveSmaller;
+      }
+      if (a[key] > b[key]) {
+        return moveLarger;
+      }
+      return 0;
+    };
+  }
+
+
 }

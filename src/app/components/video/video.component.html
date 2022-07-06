@@ -26,7 +26,36 @@
             </div>
             
           </div>
-          <div class="row form">
+          <div class="row form"     [ngClass]="{  event_filter: parentPage == 'games'  }"   >
+            <div *ngIf="parentPage == 'games'">
+              <label class="uppercase"   style="position: absolute; top: 23px; " >
+                {{ "zobrazit_udalosti" | translate }}
+              </label>
+              <div class="BGbutton"     [ngClass]="{  active: selected_filter == 'all'  }"    (click)="filterEvents('all')">
+                <span class="name">
+                  {{ "vsechny" | translate }}
+                </span>
+              </div>
+            </div>
+
+            <div class="BGbutton"    [ngClass]="{  active: selected_filter == 'player'  }"  (click)="filterEvents('player')" *ngIf="parentPage == 'games'">
+              <span class="name">
+                {{ "hracem" | translate }}
+              </span>
+            </div>
+
+            <div class="BGbutton"   [ngClass]="{  active: selected_filter == 'team'  }"  (click)="filterEvents('team')" *ngIf="parentPage == 'games'">
+              <span class="name">
+                {{ "tymu" | translate }}
+              </span>
+            </div>
+
+            <div class="BGbutton"  [ngClass]="{  active: selected_filter == 'opposition'  }" (click)="filterEvents('opposition')" *ngIf="parentPage == 'games'">
+              <span class="name">
+                {{ "soupere" | translate }}
+              </span>
+            </div>
+
             <div class="column select">
               <label class="uppercase">{{ "oznacit_videa" | translate }}</label>
               <button [class.active]="select_all" (click)="toggleSelectAll()">
@@ -51,8 +80,8 @@
                     <!--{{getShotType(video)}}-->
                   </div>
                   <!-- <div class="download" (click)="download(video)" [ngClass]="{'active':video.downloading==true}"></div> -->
-                  <div class="menu" (click)="toggleVideoDetail(video)" *ngIf="video.events != undefined &&  video.events.length > 0" ></div>
-                  <div class="menu-blank" *ngIf="video.events != undefined && video.events.length == 0" ></div>
+                  <div class="menu" (click)="toggleVideoDetail(video)" *ngIf="video.events != undefined &&  getVisibleEventsCount(video.events) > 0" ></div>
+                  <div class="menu-blank" *ngIf="video.events != undefined &&  getVisibleEventsCount(video.events) == 0" ></div>
                   <div class="play" (click)="playVideo(video)"></div>
                   <div class="edit"></div>
                   <div class="cropped" [ngClass]="{
@@ -77,7 +106,9 @@
                     <div class="event-row"   [ngClass]="{ 
                       active: event.active == true,
                       playing: event.playing == true
-                    }"    >
+                    }"    
+                    *ngIf="event.visible != false"
+                    >
                       <div
                       class="checkbox-white"
                       [ngClass]="{ 
@@ -93,7 +124,7 @@
 
 
                     <span class="selected-eva">
-                      KVA
+                      {{   getTeamShort(event.teamId )  }}
                     </span>
                     <span class="gameState" >
                       {{ event.gameState }}
