@@ -4097,11 +4097,15 @@ export class GamesComponent implements OnInit {
         loaded_data["shifts"].forEach((item, index) => {
 
           let eventData=[];
-          eventData = eventData.concat( this.updateEventName (item.dumpIns ,"nahozeni"));
+          eventData = eventData.concat( this.updateEventName (item.faceOffs ,"vhazovani"));
           eventData = eventData.concat( this.updateEventName (item.dumpOuts ,"vyhozeni"));
-          eventData = eventData.concat( this.updateEventName (item.puckWins,"zisk_puku"));
+          eventData = eventData.concat( this.updateEventName (item.dumpIns ,"nahozeni"));
+          eventData = eventData.concat( this.updateEventName (item.passes ,"prihravky"));
           eventData = eventData.concat( this.updateEventName (item.shots,"strela"));
-          eventData = eventData.concat( this.updateEventName (item.shotsOnGoal,"strely_na_branku"));
+          eventData = eventData.concat( this.updateEventName (item.zoneEntries ,"vstupy_do_pasma"));
+          eventData = eventData.concat( this.updateEventName (item.zoneExits ,"vystupy_z_pasma"));
+          eventData = eventData.concat( this.updateEventName (item.puckWins,"zisk_puku"));
+
           eventData.sort(this.sortBy('time', false));
           this.videos_data.push({
             index: index,
