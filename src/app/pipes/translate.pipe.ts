@@ -1978,7 +1978,7 @@ export class TranslatePipe implements PipeTransform {
       },
       {
         key: "soupere",
-        cz: "soupeře",
+        cz: "Soupeře",
         en: "Opponent",
       },
       {
@@ -1988,7 +1988,7 @@ export class TranslatePipe implements PipeTransform {
       },
       {
         key: "tymu",
-        cz: "týmu",
+        cz: "Týmu",
         en: "Team",
       },
       {
