@@ -28,7 +28,7 @@ export enum EventType {
 
 
 export enum EventKey {
-    SHOTS = 'strela',
+    SHOTS = 'strely',
     PASSES = 'prihravky',
     ENTRIES = 'vstupy_do_pasma',
     EXITS = 'vystupy_z_pasma',

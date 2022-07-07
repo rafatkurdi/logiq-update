@@ -40,7 +40,7 @@
 
             <div class="BGbutton"    [ngClass]="{  active: selected_filter == 'player'  }"  (click)="filterEvents('player')" *ngIf="parentPage == 'games'">
               <span class="name">
-                {{ "hracem" | translate }}
+                {{ "hrace" | translate }}
               </span>
             </div>
 
@@ -120,7 +120,7 @@
                       </span>
 
 
-                    <span class="selected-eva">
+                    <span class="team">
                       {{   getTeamShort(event.teamId )  }}
                     </span>
                     <span class="gameState" >

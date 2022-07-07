@@ -1972,8 +1972,8 @@ export class TranslatePipe implements PipeTransform {
         en: "All",
       },
       {
-        key: "hracem",
-        cz: "Hráčem",
+        key: "hrace",
+        cz: "Hráče",
         en: "Player",
       },
       {

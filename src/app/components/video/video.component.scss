@@ -457,10 +457,10 @@
           background-color: rgba(193, 199, 205, 0.150548);
         }
 
-        .video-button-selected {
-          border: 1px solid rgba(18, 22, 25, 1);
-          opacity: 1;
-        }
+        // .video-button-selected {
+        //   border: 1px solid rgba(18, 22, 25, 1);
+        //   opacity: 1;
+        // }
 
         .event-row {
           width: 100%;
@@ -468,7 +468,7 @@
           padding: 9px 12px;
 
           &.playing{
-            background-color: #fff;
+            background-color: #dde1e6;
             color: #121619;
 
             .play{
@@ -501,7 +501,8 @@
             float: left;
 
             &.active {
-              background: url("/assets/checkbox-select-white-on.svg") no-repeat;
+              background: url("/assets/check-check-on.svg") no-repeat;
+              border: none;
             }
 
           }
@@ -509,12 +510,14 @@
           .desc {
             float: right;
             margin: 0 6px 0 6px;
+            font-size: 12px;
             font-family: Inter;
             font-weight: normal;
             font-stretch: normal;
             font-style: normal;
             line-height: 1.57;
             letter-spacing: normal;
+            width: 21%;
           }
 
           .state {
@@ -529,10 +532,10 @@
             margin-right : 10px;
           }
 
-          .selected-eva{
-            width: 32px;
+          .team{
+            width: 28px;
             height: 18px;
-            margin: 8px 8px 0;
+            margin: 0 8px 0;
             font-family: Inter;
             font-size: 12px;
             font-weight: normal;
@@ -540,12 +543,14 @@
             font-style: normal;
             line-height: 1.5;
             letter-spacing: normal;
+            display: inline-block;
+            vertical-align: top;
           }
 
           .event-type{
             width: 104px;
             height: 18px;
-            margin: 8px 8px 0;
+            margin: 0 8px 0;
             font-family: Inter;
             font-size: 12px;
             font-weight: normal;
@@ -553,6 +558,20 @@
             font-style: normal;
             line-height: 1.5;
             letter-spacing: normal;
+            vertical-align: top;
+          }
+
+          .gameState{
+            height: 18px;
+            font-family: Inter;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            display: inline-block;
+            vertical-align: top;
           }
 
           .time {
@@ -673,10 +692,10 @@
           }
 
           &.playing {
-            background-color: #fff;
+            background-color: #a2a9b0;
             // border-color: #9c9c9c;
-            color: #121619;
-
+            color: #fff;
+            
             .checkbox {
               background-color: #fff;
 
