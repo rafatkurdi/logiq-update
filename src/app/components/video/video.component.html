@@ -113,7 +113,7 @@
                       [ngClass]="{ 
                         active: event.active == true,
                         playing: event.playing == true
-                      }" (click)="toggleActiveEvent(event)"></div>
+                      }" (click)="toggleActiveEvent(event,video)"></div>
 
                       <span class="time">
                         {{ event.time | format_sesonds2 }}
@@ -145,8 +145,8 @@
 
 
                       <div class="desc">
-                        {{ getPlayerJersey(video.player) }}
-                        {{ getPlayerName(video.player) }}
+                        {{ getPlayerJersey(event.player) }}
+                        {{ getPlayerName(event.player) }}
                         <!--{{getShotType(video)}}-->
                       </div>
 
@@ -244,9 +244,9 @@
               <div class="right">
                 <div class="label">{{"event_evaluation" | translate}}</div>
                 <div>
-                  <img src="/assets/ico-positive-default.svg">
-                  <img src="/assets/ico-neutral-default.svg">
-                  <img src="/assets/ico-negative-default.svg">
+                  <img  class="positive_feedback"  [ngClass]="{'selected': selected_feedback == 'positive' }" src="/assets/ico-positive-default.svg"  (click)="feedbackClick('positive')"  >
+                  <img  class="neutral_feedback"  [ngClass]="{'selected': selected_feedback == 'neutral' }"     src="/assets/ico-neutral-default.svg" (click)="feedbackClick('neutral')">
+                  <img  class="negative_feedback" [ngClass]="{'selected': selected_feedback == 'negative' }"  src="/assets/ico-negative-default.svg"  (click)="feedbackClick('negative')">
                 </div>
               </div>
             </div>

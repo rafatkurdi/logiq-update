@@ -50,6 +50,7 @@ export class VideoBoxComponent implements OnInit {
   @Input() teams_list: any = [];
   @Input() parentPage : string = "";
   selected_filter:string = "all";
+  selected_feedback:string ='positive';
 
   video_type: string = "";
 
@@ -150,12 +151,14 @@ export class VideoBoxComponent implements OnInit {
 
 
 
-  toggleActiveEvent(evant: any) {
+  toggleActiveEvent(evant: any,video : any) {
     if (evant["active"] == true) {
       evant["active"] = false;
     } else {
       evant["active"] = true;
+      video["active"] = true;
     }
+
   }
 
 
@@ -785,7 +788,7 @@ export class VideoBoxComponent implements OnInit {
 
 
   playEventVideo(video_data: any, event_data: any) {
-    if (video_data.playing == false) {
+    if (event_data.playing == undefined || event_data.playing == false) {
       this.videos2.forEach((item) => {
         item["playing"] = false;
 
@@ -793,6 +796,12 @@ export class VideoBoxComponent implements OnInit {
           item["playing"] = true;
           item["active"] = true;
         }
+
+        item.events.forEach((event) => {
+          event["playing"] = false;
+        });
+
+
       });
 
       event_data["playing"] = true;
@@ -850,6 +859,11 @@ export class VideoBoxComponent implements OnInit {
 
       this.videos2.forEach((item) => {
         item["playing"] = false;
+
+        item.events.forEach((event) => {
+          event["playing"] = false;
+        });
+
       });
       this.video_title = "";
       this.active_video_index = undefined;
@@ -928,25 +942,25 @@ export class VideoBoxComponent implements OnInit {
 
   increaseVideoAfterTime() {
     var t = parseInt(this.video_after);
-    if (t == 30)
+    if (t >= 30)
       return;
-    t += 5;
+    t += 1;
     this.video_after = t > 0 ? "+" + t : t + "";
   }
   decreaseVideoAfterTime() {
     debugger;
     var t = parseInt(this.video_after);
-    if (t <= -30)
+    if (t == 0)
       return;
-    t -= 5;
+    t -= 1;
     this.video_after = t > 0 ? "+" + t : t + "";
   }
 
   increaseVideoBeforeTime() {
     var t = parseInt(this.video_before);
-    if (t == 30)
+    if (t == 0)
       return;
-    t += 5;
+    t += 1;
     this.video_before = t > 0 ? "+" + t : t + "";
   }
   decreaseVideoBeforeTime() {
@@ -955,7 +969,7 @@ export class VideoBoxComponent implements OnInit {
     if (t <= -30) {
       return;
     }
-    t -= 5;
+    t -= 1;
     this.video_before = t > 0 ? "+" + t : t + "";
   }
 
@@ -1127,6 +1141,10 @@ export class VideoBoxComponent implements OnInit {
         return 0 ;
     else
       return events.filter(x=>x.visible != false).length;
+  }
+
+  feedbackClick(feedbackType : string){
+      this.selected_feedback = feedbackType;
   }
 
   

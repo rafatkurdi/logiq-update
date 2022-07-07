@@ -518,6 +518,7 @@
             line-height: 1.57;
             letter-spacing: normal;
             width: 21%;
+            min-width: 110px;
           }
 
           .state {
@@ -1686,6 +1687,8 @@
       img {
         margin: 6px;
         cursor: pointer;
+        width: 32px;
+        height: 32px;
       }
 
       .label {
@@ -1700,6 +1703,23 @@
         text-transform: uppercase;
       }
 
+      .positive_feedback{
+        &.selected{
+          content: url("/assets/ico-positive-selected.svg");
+        }
+      }
+
+      .neutral_feedback{
+          &.selected{
+            content: url("/assets/ico-neutral-selected.svg");
+                  }
+      }
+
+      .negative_feedback{
+        &.selected{
+          content: url("/assets/ico-negative-selected.svg");
+        }
+      }
     }
 
     .left {
@@ -1815,6 +1835,7 @@
         border-radius: 4px;
         background-color: #f2f4f8;
         display: inline-block;
+        cursor: pointer;
       }
 
 
