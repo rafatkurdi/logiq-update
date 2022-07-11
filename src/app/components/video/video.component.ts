@@ -724,9 +724,11 @@ export class VideoBoxComponent implements OnInit {
           item["active"] = true;
         }
 
-        item.events.forEach((event) => {
-          event["playing"] = false;
-        });
+        if(item.events != undefined){
+          item.events.forEach((event) => {
+            event["playing"] = false;
+          });
+        }
 
       });
 
