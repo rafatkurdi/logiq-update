@@ -136,10 +136,10 @@
                       <div class="edit"></div>
 
                       <div class="cropped" [ngClass]="{
-                      active: video.before != '-5' || video.after != '+5'
+                      active: event.before != '-30' || event.after != '+30'
                     }">
                         <div class="tooltip">
-                          {{ video.before }} {{ video.after }}
+                          {{ event.before }} {{ event.after }}
                         </div>
                       </div>
 
@@ -183,7 +183,7 @@
               <div class="row">
                 <div class="bg-group">
                   <label>{{ "game_time" | translate }}</label>
-                  <input [(ngModel)]="active_video_time" readonly />
+                  <input [(ngModel)]="active_video_time" />
                   <div class="controls">
                     <div class="control-plus" (click)="increaseVideoTime()"></div>
                     <div class="control-minus" (click)="decreaseVideoTime()"></div>
@@ -210,7 +210,7 @@
 
                 <div class="bg-group div-btn-play-selected">
                   <button class="btn-play-selected">
-                    <span>{{ "play_selected_section" | translate }}</span>
+                    <span  (click)="playSelectedSection()" >{{ "play_selected_section" | translate }}     </span>
                   </button>
                 </div>
 

@@ -18,8 +18,8 @@ import { forEach } from "lodash";
 export class VideoBoxComponent implements OnInit {
   select_all: boolean = false;
 
-  minValue: number = -30;
-  maxValue: number = 30;
+  minValue: number = -5;
+  maxValue: number = 5;
   options: Options = {
     floor: -30,
     ceil: 30,
@@ -39,7 +39,7 @@ export class VideoBoxComponent implements OnInit {
   video_title: string = "";
   active_video_index: number = undefined;
   active_video_time: string = "";
-
+  active_event: any = undefined;
   download_all_disabled: boolean = false;
   sending_video_clip: boolean = false;
 
@@ -723,6 +723,11 @@ export class VideoBoxComponent implements OnInit {
           item["playing"] = true;
           item["active"] = true;
         }
+
+        item.events.forEach((event) => {
+          event["playing"] = false;
+        });
+
       });
 
       //odectu 5 sekund
@@ -765,10 +770,13 @@ export class VideoBoxComponent implements OnInit {
 
       //   " - " +
       //   video_cas;
-      // this.active_video_index = video_data.index;
+      this.active_video_index = video_data.index;
       this.active_video_time = video_cas;
-      // this.minValue = Number(video_data.before);
-      // this.maxValue = Number(video_data.after);
+      this.active_event = undefined;
+      this.minValue = Number(video_data.before);
+      this.maxValue = Number(video_data.after);
+      this.video_before = video_data.before
+      this.video_after = video_data.after;
 
       this.is_playing = true;
     } else {
@@ -777,10 +785,10 @@ export class VideoBoxComponent implements OnInit {
       });
       this.video_title = "";
       this.active_video_index = undefined;
+      this.active_event = undefined;
       this.active_video_time = "";
       this.minValue = -5;
       this.maxValue = 5;
-
       this.is_playing = false;
     }
   }
@@ -836,9 +844,9 @@ export class VideoBoxComponent implements OnInit {
         sec +
         "&nbsp;&nbsp;&nbsp;" +
         "<img src='/assets/player.svg' > &nbsp;" +
-        this.getPlayerJersey(video_data.player) +
+        this.getPlayerJersey(event_data.player) +
         "&nbsp;" +
-        this.getPlayerName(video_data.player) +
+        this.getPlayerName(event_data.player) +
         "&nbsp;&nbsp;&nbsp;" +
         "<img src='/assets/date.svg' > &nbsp;" +
         this.formatMatchDate(video_data.matchDate);
@@ -847,10 +855,13 @@ export class VideoBoxComponent implements OnInit {
 
       //   " - " +
       //   video_cas;
-      // this.active_video_index = video_data.index;
+      this.active_video_index = undefined;
+      this.active_event = event_data;
       // this.active_video_time = video_cas;
-      // this.minValue = Number(video_data.before);
-      // this.maxValue = Number(video_data.after);
+      this.minValue = Number(event_data.before);
+      this.maxValue = Number(event_data.after);
+      this.video_before = event_data.before
+      this.video_after = event_data.after;
 
       this.is_playing = true;
     } else {
@@ -867,6 +878,7 @@ export class VideoBoxComponent implements OnInit {
       });
       this.video_title = "";
       this.active_video_index = undefined;
+      this.active_event = undefined;
       this.active_video_time = "";
       this.minValue = -5;
       this.maxValue = 5;
@@ -890,19 +902,30 @@ export class VideoBoxComponent implements OnInit {
   }
 
   minValueChange() {
-    this.videos2.forEach((video) => {
-      if (video.index == this.active_video_index) {
-        video["before"] = String(this.minValue);
-      }
-    });
+
+    if(this.active_event != undefined){
+      this.active_event["before"]= String(this.minValue);
+    }else{
+      this.videos2.forEach((video) => {
+        if (video.index == this.active_video_index) {
+          video["before"] = String(this.minValue);
+        }
+      });
+    }
+    this.video_before = String(this.minValue);
   }
 
   maxValueChange() {
-    this.videos2.forEach((video) => {
-      if (video.index == this.active_video_index) {
-        video["after"] = "+" + String(this.maxValue);
-      }
-    });
+    if(this.active_event != undefined){
+      this.active_event["after"] = "+" + String(this.maxValue);
+    }else{
+      this.videos2.forEach((video) => {
+        if (video.index == this.active_video_index) {
+          video["after"] = "+" + String(this.maxValue);
+        }
+      });
+    }
+    this.video_after ="+" + String(this.maxValue);
   }
 
   fmtMSS(s) {
@@ -992,6 +1015,7 @@ export class VideoBoxComponent implements OnInit {
     let seconds = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
     let minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
     this.active_video_time = minutes + ':' + seconds;
+    console.log(this.active_video_time)
   }
 
   decreaseVideoTime() {
@@ -1001,6 +1025,7 @@ export class VideoBoxComponent implements OnInit {
     let seconds = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds();
     let minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes();
     this.active_video_time = minutes + ':' + seconds;
+    console.log(this.active_video_time)
   }
 
 

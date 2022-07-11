@@ -4105,6 +4105,10 @@ export class GamesComponent implements OnInit {
           eventData = eventData.concat( this.updateEventName (item.zoneEntries ,"vstupy_do_pasma"));
           eventData = eventData.concat( this.updateEventName (item.zoneExits ,"vystupy_z_pasma"));
           eventData = eventData.concat( this.updateEventName (item.puckWins,"zisk_puku"));
+          eventData.forEach((event, index) => {
+            event["before"] = "-5";
+            event["after"] = "+5";
+          })
 
           eventData.sort(this.sortBy('time', false));
           this.videos_data.push({
