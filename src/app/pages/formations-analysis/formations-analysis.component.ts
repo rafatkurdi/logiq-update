@@ -359,6 +359,7 @@ export class FormationsAnalysisComponent implements OnInit, AfterViewInit {
   active_player6 = false;
 
   selected_games: any = [];
+  selected_video_game: string = "";
 
   constructor(
     private gamesService: GamesService,
@@ -3958,6 +3959,8 @@ export class FormationsAnalysisComponent implements OnInit, AfterViewInit {
   }
 
   openVideoPlayer(data: any) {
+    console.log(data)
+    this.selected_video_game = data[0].match;
     this.videos_data = data;
     this.show_video_player = true;
   }

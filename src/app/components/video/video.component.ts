@@ -49,6 +49,8 @@ export class VideoBoxComponent implements OnInit {
   @Input() active_type: string = "";
   @Input() teams_list: any = [];
   @Input() parentPage : string = "";
+  @Input() competitionUid : string = "";
+  @Input() matchUid : string = "";
   selected_filter:string = "all";
   selected_feedback:string ='positive';
 
@@ -740,40 +742,42 @@ export class VideoBoxComponent implements OnInit {
       console.log(video_time)
       console.log(sec)
 
-      let video_cas = "";
-      if (this.fmtMSS(sec).length == 4) {
-        video_cas = "0" + sec;
-      } else {
-        video_cas = sec;
-      }
 
-      let video_url =
-        "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
-        video_time +
-        "&id=" +
-        videoId;
-      this.video_url_safe =
-        this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
-      this.video_title =
-        //this.getPlayerJersey(video_data.player) +
-        "<img src='/assets/time.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
-        sec +
-        "</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-        "<img style='margin-right: 16px;' src='/assets/player.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
-        this.getPlayerJersey(video_data.player) +
-        " " +
-        this.getPlayerName(video_data.player) +
-        "</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
-        "<img style='margin-right: 16px;' src='/assets/date.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
-        this.formatMatchDate(video_data.matchDate) +
-        "</div>"
+      this.playSelectedVideo(sec,video_time.toString(),videoId, video_data.player,video_data.matchDate )
+
+      // let video_cas = "";
+      // if (this.fmtMSS(sec).length == 4) {
+      //   video_cas = "0" + sec;
+      // } else {
+      //   video_cas = sec;
+      // }
+
+      // let video_url =
+      //   "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
+      //   video_time +
+      //   "&id=" +
+      //   videoId;
+      // this.video_url_safe =
+      //   this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
+      // this.video_title =
+      //   //this.getPlayerJersey(video_data.player) +
+      //   "<img src='/assets/time.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
+      //   sec +
+      //   "</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+      //   "<img style='margin-right: 16px;' src='/assets/player.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
+      //   this.getPlayerJersey(video_data.player) +
+      //   " " +
+      //   this.getPlayerName(video_data.player) +
+      //   "</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+      //   "<img style='margin-right: 16px;' src='/assets/date.svg' > &nbsp;&nbsp; <div style='margin-right: 16px;'>" +
+      //   this.formatMatchDate(video_data.matchDate) +
+      //   "</div>"
 
       //   " - " +
 
       //   " - " +
       //   video_cas;
       this.active_video_index = video_data.index;
-      this.active_video_time = video_cas;
       this.active_event = undefined;
       this.minValue = Number(video_data.before);
       this.maxValue = Number(video_data.after);
@@ -826,39 +830,41 @@ export class VideoBoxComponent implements OnInit {
       console.log(video_time)
       console.log(sec)
 
-      let video_cas = "";
-      if (this.fmtMSS(sec).length == 4) {
-        video_cas = "0" + sec;
-      } else {
-        video_cas = sec;
-      }
+      this.playSelectedVideo(sec,video_time.toString(),videoId, event_data.player,video_data.matchDate )
 
-      let video_url =
-        "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
-        video_time +
-        "&id=" +
-        videoId;
-      this.video_url_safe =
-        this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
-      this.video_title =
-        //this.getPlayerJersey(video_data.player) +
-        "<img src='/assets/time.svg' > &nbsp;" +
-        sec +
-        "&nbsp;&nbsp;&nbsp;" +
-        "<img src='/assets/player.svg' > &nbsp;" +
-        this.getPlayerJersey(event_data.player) +
-        "&nbsp;" +
-        this.getPlayerName(event_data.player) +
-        "&nbsp;&nbsp;&nbsp;" +
-        "<img src='/assets/date.svg' > &nbsp;" +
-        this.formatMatchDate(video_data.matchDate);
+      // let video_cas = "";
+      // if (this.fmtMSS(sec).length == 4) {
+      //   video_cas = "0" + sec;
+      // } else {
+      //   video_cas = sec;
+      // }
+
+      // let video_url =
+      //   "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
+      //   video_time +
+      //   "&id=" +
+      //   videoId;
+      // this.video_url_safe =
+      //   this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
+      // this.video_title =
+      //   //this.getPlayerJersey(video_data.player) +
+      //   "<img src='/assets/time.svg' > &nbsp;" +
+      //   sec +
+      //   "&nbsp;&nbsp;&nbsp;" +
+      //   "<img src='/assets/player.svg' > &nbsp;" +
+      //   this.getPlayerJersey(event_data.player) +
+      //   "&nbsp;" +
+      //   this.getPlayerName(event_data.player) +
+      //   "&nbsp;&nbsp;&nbsp;" +
+      //   "<img src='/assets/date.svg' > &nbsp;" +
+      //   this.formatMatchDate(video_data.matchDate);
 
       //   " - " +
 
       //   " - " +
-      //   video_cas;
       this.active_video_index = undefined;
       this.active_event = event_data;
+      this.active_event['parentVideo'] = video_data ;
       // this.active_video_time = video_cas;
       this.minValue = Number(event_data.before);
       this.maxValue = Number(event_data.after);
@@ -889,6 +895,38 @@ export class VideoBoxComponent implements OnInit {
     }
   }
 
+
+  playSelectedVideo( sec : string, video_time : string , videoId :string, player : string, matchDate : string  ){
+
+      let video_cas = "";
+      if (this.fmtMSS(sec).length == 4) {
+        video_cas = "0" + sec;
+      } else {
+        video_cas = sec;
+      }
+
+      let video_url =
+        "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
+        video_time +
+        "&id=" +
+        videoId;
+      this.video_url_safe =
+        this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
+      this.video_title =
+        //this.getPlayerJersey(video_data.player) +
+        "<img src='/assets/time.svg' > &nbsp;" +
+        sec +
+        "&nbsp;&nbsp;&nbsp;" +
+        "<img src='/assets/player.svg' > &nbsp;" +
+        this.getPlayerJersey(player) +
+        "&nbsp;" +
+        this.getPlayerName(player) +
+        "&nbsp;&nbsp;&nbsp;" +
+        "<img src='/assets/date.svg' > &nbsp;" +
+        this.formatMatchDate(matchDate);
+
+        this.active_video_time = video_cas;
+  }
 
 
 
@@ -1172,6 +1210,51 @@ export class VideoBoxComponent implements OnInit {
 
   feedbackClick(feedbackType : string){
       this.selected_feedback = feedbackType;
+  }
+
+  playSelectedSection(){
+
+    let sec = this.timeToSeconds(this.active_video_time)
+
+    this.defaultService
+      .getVideoTime( this.competitionUid , this.matchUid,  sec)
+      .subscribe((data) => {
+        console.log(data);
+        let videoTime = data.videoTime;
+        
+        let selected_video_info = this.active_event == undefined ? this.currentVideo :   this.active_event;
+        let matchId =  this.active_event == undefined ? this.currentVideo :   this.active_event;
+        this.playSelectedVideo(sec,data.videoTime,data.videoId, selected_video_info.player,selected_video_info.matchDate )
+
+      // let video_url =
+      //   "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
+      //   video_time +
+      //   "&id=" +
+      //   videoId;
+      // this.video_url_safe =
+      //   this.sanitizer.bypassSecurityTrustResourceUrl(video_url);
+      // this.video_title =
+      //   //this.getPlayerJersey(video_data.player) +
+      //   "<img src='/assets/time.svg' > &nbsp;" +
+      //   sec +
+      //   "&nbsp;&nbsp;&nbsp;" +
+      //   "<img src='/assets/player.svg' > &nbsp;" +
+      //   this.getPlayerJersey(selected_video_info.player) +
+      //   "&nbsp;" +
+      //   this.getPlayerName(selected_video_info.player) +
+      //   "&nbsp;&nbsp;&nbsp;" +
+      //   "<img src='/assets/date.svg' > &nbsp;" +
+      //   this.formatMatchDate(selected_video_info.matchDate);
+
+
+      });
+  }
+
+  timeToSeconds(time:string){
+            if(time != undefined && time.indexOf(':') > -1 )
+                return String( Number(time.split(':')[0])*60 + Number(time.split(':')[1]) );
+            else
+                return time
   }
 
   

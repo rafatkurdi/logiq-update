@@ -1477,6 +1477,7 @@ export class BulyMapComponent implements OnInit, AfterViewInit {
         "homeTeam": item["homeTeam"],
         "awayTeam": item["awayTeam"],
         "matchDate": item["matchDate"],
+        "match": data["match"],
         "score": item["score"],
         "download_type": "buly",
         "buly_won": item["won"],

@@ -798,4 +798,25 @@ export class DefaultService {
 
     return this.http.post(url, body).map((res) => res.json());
   }
+
+
+  getVideoTime(competitionId : string, matchId : string , timeInSec : string  ) {
+    let headers = new Headers({
+      Authorization: "Bearer " + this.token["access_token"],
+    });
+    let options = new RequestOptions({ headers: headers });
+
+    let url = this.api_url + "/api/v1/video/"+competitionId+"/"+matchId+"/videoTime/" + timeInSec
+
+    return this.http
+      .get(url, options)
+      .map((res) => res.json())
+      .catch((e) => {
+        if (e.status === 401) {
+          return Observable.throw("Unauthorized");
+        }
+      });
+  }
+
+
 }
