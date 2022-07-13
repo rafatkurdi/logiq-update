@@ -1,12 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
-<desc>Created with Fabric.js 1.7.22</desc>
-<defs>
-</defs>
-<g transform="translate(128 128) scale(0.72 0.72)" style="">
-	<g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(175.05000000000007 175.04999999999995) rotate(180) scale(3.89 3.89) matrix(-1 0 0 1 90 0) " >
-	<circle cx="45" cy="45" r="45" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(26,115,170); fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
-	<path d="M 20.142 66.312 h 10.208 c 0.795 0 1.44 -0.645 1.44 -1.44 V 37.665 c 0 -0.795 -0.645 -1.44 -1.44 -1.44 H 20.142 V 66.312 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-	<path d="M 66.094 43.729 c 2.079 0 3.764 -1.685 3.764 -3.764 c 0 -2.079 -1.685 -3.764 -3.764 -3.764 h -11.93 c 2.076 -3.739 2.139 -15.096 -2.787 -16.46 c -0.933 -0.258 -1.859 0.454 -1.963 1.417 c -0.866 7.97 -5.742 17.877 -10.7 18.164 h -3.862 v 23.755 h 2.003 c 1.078 0 2.108 0.368 3.008 0.963 c 2.245 1.486 6.025 2.356 9.648 2.265 h 1.752 v 0.006 h 12.036 c 2.079 0 3.764 -1.685 3.764 -3.764 s -1.685 -3.764 -3.764 -3.764 h 1.678 c 2.079 0 3.764 -1.685 3.764 -3.764 c 0 -2.079 -1.685 -3.764 -3.764 -3.764 h 1.118 c 2.079 0 3.764 -1.685 3.764 -3.764 S 68.173 43.729 66.094 43.729 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-</g>
-</g>
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <title>icoNegative_default</title>
+  <g id="8.-Videokouč" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="2.-Centrum-videa-2.0---b2" transform="translate(-1688.000000, -168.000000)" fill-rule="nonzero">
+      <g id="icoNegative_default" transform="translate(1688.000000, 168.000000)">
+        <circle id="Oval" stroke-width="2" fill="#FFFFFF" cx="16" cy="16" r="15" style="stroke: rgb(29, 92, 255);"/>
+        <g id="thumbs-down" transform="translate(8.000000, 10.000000)" fill="#878D96">
+          <path d="M3,0 L1,0 C0.4476875,0 0,0.4476875 0,1 L0,8 C0,8.55225 0.4476875,9 1,9 L3,9 C3.5523125,9 4,8.55225 4,8 L4,1 C4,0.4476875 3.5523125,0 3,0 Z M14.6023437,6.50746875 C14.8470938,6.2406875 15,5.88821875 15,5.49759375 C15,4.76415625 14.4728437,4.1561875 13.7769062,4.026125 C13.9157187,3.7988125 14,3.53446875 14,3.24859375 C14,2.5821875 13.5625,2.024125 12.9610625,1.82890625 C12.985,1.7225625 13,1.6129375 13,1.49934375 C13,0.67109375 12.328625,0 11.5,0 L9.66590625,0 C8.5844375,0 7.53209375,0.35065625 6.66675,0.999375 L5.5999375,1.79915625 C5.22228125,2.08225 5,2.5266875 5,2.9986875 L5,7.9965 C5,7.9965 5.00596875,8.00246875 5.00671875,8.00321875 C5.00890625,8.44053125 5.1946875,8.873125 5.563,9.167375 L6.07225,9.5744375 C8.6305,11.620375 7.48159375,14 9.454375,14 C10.4217188,14 11.0001562,13.2336562 11.0001562,12.4965625 C11.0001562,12.0232187 10.6328125,10.6804375 9.9213125,9.49584375 L14.5,9.49584375 C15.328625,9.49584375 16,8.82475 16,7.9965 C16,7.20328125 15.3823125,6.56090625 14.6023437,6.50746875 Z" id="Shape" style="fill: rgb(29, 92, 255);"/>
+        </g>
+      </g>
+    </g>
+  </g>
 </svg>

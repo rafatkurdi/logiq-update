@@ -60,6 +60,8 @@ export class VideoBoxComponent implements OnInit {
   NotePlayers: any = [];
   videoClip: any = {};
   currentVideo: any = {};
+  feedback_notes_header : string ="";
+  feedback_notes_text : string ="";
 
   constructor(
     private translate: TranslatePipe,
@@ -738,10 +740,9 @@ export class VideoBoxComponent implements OnInit {
       let video_time = Number(video_data["videoTime"]);
       let videoId = video_data["videoId"];
 
-      let sec = this.fmtMSS(video_data["time"]);
+      let sec = video_data["time"];
       console.log(video_time)
       console.log(sec)
-
 
       this.playSelectedVideo(sec,video_time.toString(),videoId, video_data.player,video_data.matchDate )
 
@@ -825,7 +826,7 @@ export class VideoBoxComponent implements OnInit {
       let video_time = Number(event_data["videoTime"]);
       let videoId = video_data["videoId"];
 
-      let sec = this.fmtMSS(event_data["time"]);
+      let sec = event_data["time"];
 
       console.log(video_time)
       console.log(sec)
@@ -898,12 +899,16 @@ export class VideoBoxComponent implements OnInit {
 
   playSelectedVideo( sec : string, video_time : string , videoId :string, player : string, matchDate : string  ){
 
+      sec = this.fmtMSS(sec);
+
       let video_cas = "";
       if (this.fmtMSS(sec).length == 4) {
         video_cas = "0" + sec;
       } else {
         video_cas = sec;
       }
+
+      this.active_video_time = video_cas;
 
       let video_url =
         "http://hockeylogic.sh10w1.esports.cz/video_player/video.php?starttime=" +
@@ -925,7 +930,6 @@ export class VideoBoxComponent implements OnInit {
         "<img src='/assets/date.svg' > &nbsp;" +
         this.formatMatchDate(matchDate);
 
-        this.active_video_time = video_cas;
   }
 
 
@@ -1127,14 +1131,14 @@ export class VideoBoxComponent implements OnInit {
     let body: any = document.getElementById("videoClipDescription");
 
     let obj = {
-      "time": this.currentVideo.time,
-      "videoTime": this.currentVideo.videoTime,
-      "endVideoTime": 4500,
+      "time":  this.active_event == undefined  ?     this.currentVideo.time :   this.active_event.time  ,
+      "videoTime":  this.active_event == undefined  ?     this.currentVideo.videoTime :   this.active_event.videoTime  ,
+      "endVideoTime": this.currentVideo.videoEndTime,
       "videoId": this.currentVideo.videoId,
-      "matchId": this.currentVideo.match,
+      "matchId": this.matchUid, 
       "name": name.value,
       "description": body.value,
-      "type": "thumbs-up",
+      "type": this.selected_feedback,
       "players": this.videoClip.players
     };
 
